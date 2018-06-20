@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqxxcx.customer.mapper.DmpzzlMapper">
+
+	<resultMap type="com.sqxxcx.customer.api.model.DmpzzlModel" id="BaseResultMap">
+		<result property="pzzlDm" column="pzzl_dm" jdbcType="VARCHAR" />
+		<result property="pzzlmc" column="pzzlmc" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	
+	<select id="selectDmPzzl" resultMap="BaseResultMap" parameterType="com.sqxxcx.customer.api.vo.DmpzzlReqVo">		
+		SELECT * from yhs_mdm_db.v_g3_dm_pzzl where 1=1
+		<if test="pzzlDm != null and pzzlDm != ''"> and pzzl_dm=#{pzzlDm}</if>
+		<if test="pzzlmc != null and pzzlmc != ''"> and pzzlmc=#{pzzlmc}</if>
+	</select>
+    
+</mapper>

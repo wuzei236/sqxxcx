@@ -1,0 +1,384 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.parent</groupId>
+		<artifactId>sqxxcx</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	
+	<artifactId>sqxxcx-customer-service</artifactId>
+	<version>1.0.0</version>
+
+
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.java.version>1.8</project.build.java.version>
+		<mybatis.version>3.4.0</mybatis.version>
+        <mybatis-spring.version>1.3.0</mybatis-spring.version>
+        <!-- cas单点登录 -->
+        <shiro.version>1.4.0</shiro.version>
+		<buji.version>3.0.0</buji.version>
+		<pac4j.version>2.1.0</pac4j.version>
+		<cas-client.version>3.4.1</cas-client.version>
+		<hive.driver.version>2.1.1</hive.driver.version>
+		<!-- cas单点登录 -->
+	</properties>
+
+	<dependencies>
+		<!-- 依赖的微服务API接口包 -->
+		<dependency>
+			<groupId>com.parent</groupId>
+			<artifactId>sqxxcx-customer-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.parent</groupId>
+			<artifactId>sqxxcx-util</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	
+		<dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+        </dependency>
+        
+                <!-- mybatis jar 开始 -->
+         <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency> 
+        <dependency>  
+            <groupId>org.mybatis.spring.boot</groupId>  
+            <artifactId>mybatis-spring-boot-starter</artifactId>  
+            <version>1.3.2</version>  
+        </dependency> 
+
+		<!-- 解析json数据 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.47</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+		<!-- ======日志相关========== -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<exclusions>
+		      <exclusion>
+		         <artifactId>slf4j-api</artifactId>
+		         <groupId>org.slf4j</groupId>
+		      </exclusion>
+		   </exclusions>
+   			<scope>provided</scope>
+		</dependency>
+		<!-- ======日志相关========== -->
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        
+        <!-- AOP切片 -->
+        <dependency>  
+		    <groupId>org.springframework.boot</groupId>  
+		    <artifactId>spring-boot-starter-aop</artifactId>  
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j-over-slf4j</artifactId>
+					<groupId>org.slf4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		
+		 <!-- MBG -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+            <scope>compile</scope>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 分页 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>3.2.3</version>
+        </dependency>
+
+        <!-- 通用Mapper -->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+        <!-- TkMybatis 会使用到JPA的注解 -->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
+		<!-- hawq驱动包 -->
+        <!-- <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency> -->
+        
+        <!-- cas单点登录 -->
+        <!--<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring-boot-web-starter</artifactId>
+			<version>${shiro.version}</version>
+		</dependency>-->
+		<!--
+		 springboot 下将shiro-cas替换为buji-pac4j 
+				http://shiro.apache.org/cas.html
+				Shiro-CAS support is deprecated, support has been moved to the Apache Shiro based buji-pac4j project.
+		-->
+		<!--<dependency>
+			<groupId>io.buji</groupId>
+			<artifactId>buji-pac4j</artifactId>
+			<version>${buji.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pac4j</groupId>
+			<artifactId>pac4j-cas</artifactId>
+			<version>${pac4j.version}</version>
+		</dependency>-->
+		<!--  pac4j支持jtw  -->
+		<!--<dependency>
+			<groupId>org.pac4j</groupId>
+			<artifactId>pac4j-jwt</artifactId>
+			<version>${pac4j.version}</version>
+		</dependency> -->
+		<!--  pac4j支持http  -->
+		<!--<dependency>
+			<groupId>org.pac4j</groupId>
+			<artifactId>pac4j-http</artifactId>
+			<version>${pac4j.version}</version>
+		</dependency> -->
+		
+		<!-- hive驱动包 -->
+		<dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <version>${hive.driver.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>jetty-util</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jetty</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            </exclusions>
+		</dependency>
+		 <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-service</artifactId>
+            <version>${hive.driver.version}</version>
+             <exclusions>
+            	<exclusion>
+            		<artifactId>jasper-runtime</artifactId>
+            		<groupId>tomcat</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jasper-compiler</artifactId>
+            		<groupId>tomcat</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jsp-api</artifactId>
+            		<groupId>javax.servlet.jsp</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jsp-api-2.1</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>servlet-api</artifactId>
+            		<groupId>javax.servlet</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>servlet-api-2.5</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jsp-2.1</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jetty-all</artifactId>
+            		<groupId>org.eclipse.jetty.aggregate</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jetty-util</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jetty</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jetty-sslengine</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+             </exclusions> 
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-jdbc</artifactId>
+            <version>${hive.driver.version}</version>
+             <exclusions>
+            	<exclusion>
+            		<artifactId>jasper-runtime</artifactId>
+            		<groupId>tomcat</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jasper-compiler</artifactId>
+            		<groupId>tomcat</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<groupId>org.eclipse.jetty.aggregate</groupId>  
+            		<artifactId>jetty-all</artifactId>  
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>hive-service</artifactId>
+            		<groupId>org.apache.hive</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>hive-service-rpc</artifactId>
+            		<groupId>org.apache.hive</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>javax.servlet</artifactId>
+            		<groupId>org.eclipse.jetty.orbit</groupId>
+            	</exclusion>
+            	<exclusion>  
+					<groupId>org.apache.hive</groupId>  
+					<artifactId>hive-shims</artifactId>  
+		        </exclusion>  
+             </exclusions> 
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-metastore</artifactId>
+            <version>${hive.driver.version}</version>
+            <exclusions>
+            	<exclusion>
+            		<artifactId>jetty-util</artifactId>
+            		<groupId>org.mortbay.jetty</groupId>
+            	</exclusion>
+            	<exclusion>
+            		<artifactId>jdk.tools</artifactId>
+            		<groupId>jdk.tools</groupId>
+            	</exclusion>
+            </exclusions>
+        </dependency>
+        <!-- hive驱动包 -->
+        
+        <!-- impala driver -->
+        <dependency>
+		  <groupId>org.apache.hadoop</groupId>
+		  <artifactId>hadoop-common</artifactId>
+		  <version>2.6.0</version>
+<!-- 		  <classifier>cdh5</classifier>
+		  <type>7.0.jar</type> -->
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>jasper-runtime</artifactId>
+        			<groupId>tomcat</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>jasper-compiler</artifactId>
+        			<groupId>tomcat</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>jsp-api</artifactId>
+        			<groupId>javax.servlet.jsp</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>servlet-api</artifactId>
+        			<groupId>javax.servlet</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>jetty-util</artifactId>
+        			<groupId>org.mortbay.jetty</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>jetty</artifactId>
+        			<groupId>org.mortbay.jetty</groupId>
+        		</exclusion>
+        		<exclusion>
+        			<artifactId>jdk.tools</artifactId>
+        			<groupId>jdk.tools</groupId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
+		<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-ribbon</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>bcprov-jdk15on</artifactId>
+					<groupId>org.bouncycastle</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		 <dependency>  
+            <groupId>org.mybatis.generator</groupId>  
+            <artifactId>mybatis-generator-core</artifactId>  
+            <version>1.3.2</version>  
+        </dependency>  
+	</dependencies>
+
+	<build>  
+        <plugins>  
+            <plugin>  
+                <groupId>org.mybatis.generator</groupId>  
+                <artifactId>mybatis-generator-maven-plugin</artifactId>  
+                <version>1.3.2</version>  
+                <configuration>  
+                    <verbose>true</verbose>  
+                    <overwrite>true</overwrite>  
+                </configuration>  
+            </plugin>  
+        </plugins>  
+    </build>  
+</project>

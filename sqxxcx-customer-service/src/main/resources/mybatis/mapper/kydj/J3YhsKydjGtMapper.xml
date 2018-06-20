@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sqxxcx.customer.mapper.kydj.J3YhsKydjGtMapper">
+
+	<resultMap type="com.sqxxcx.customer.api.model.kydj.J3YhsKydjGtModel" id="BaseResultMap">
+		<result property="djxh" column="djxh" jdbcType="DECIMAL" />
+		<result property="nrsmc" column="nrsmc" jdbcType="VARCHAR" />
+		<result property="nsrsbh" column="nsrsbh" jdbcType="VARCHAR" />
+		<result property="djzclx" column="djzclx" jdbcType="VARCHAR" />
+		<result property="djrq" column="djrq" jdbcType="TIMESTAMP" />
+		<result property="zcdz" column="zcdz" jdbcType="VARCHAR" />
+		<result property="yzbm" column="yzbm" jdbcType="VARCHAR" />
+		<result property="lxdh" column="lxdh" jdbcType="VARCHAR" />
+		<result property="scjydz" column="scjydz" jdbcType="VARCHAR" />
+		<result property="scjydyzbm" column="scjydyzbm" jdbcType="VARCHAR" />
+		<result property="scjydlxdh" column="scjydlxdh" jdbcType="VARCHAR" />
+		<result property="scjyqxq" column="scjyqxq" jdbcType="TIMESTAMP" />
+		<result property="scjyqxz" column="scjyqxz" jdbcType="TIMESTAMP" />
+		<result property="gsjgmc" column="gsjgmc" jdbcType="VARCHAR" />
+		<result property="gsfzrq" column="gsfzrq" jdbcType="TIMESTAMP" />
+		<result property="zzmc" column="zzmc" jdbcType="VARCHAR" />
+		<result property="zzhm" column="zzhm" jdbcType="VARCHAR" />
+		<result property="pzslzmhwjh" column="pzslzmhwjh" jdbcType="VARCHAR" />
+		<result property="pzsljg" column="pzsljg" jdbcType="VARCHAR" />
+		<result property="hhrs" column="hhrs" jdbcType="DECIMAL" />
+		<result property="ggrs" column="ggrs" jdbcType="DECIMAL" />
+		<result property="qzgdrs" column="qzgdrs" jdbcType="DECIMAL" />
+		<result property="gbhy_zhy__dm" column="gbhy_zhy__dm" jdbcType="VARCHAR" />
+		<result property="hymxj_dm" column="hymxj_dm" jdbcType="VARCHAR" />
+		<result property="gbhy_fshy1" column="gbhy_fshy1" jdbcType="VARCHAR" />
+		<result property="gbhy_fshy2" column="gbhy_fshy2" jdbcType="VARCHAR" />
+		<result property="jyfw" column="jyfw" jdbcType="VARCHAR" />
+		<result property="yzxm" column="yzxm" jdbcType="VARCHAR" />
+		<result property="dzyx" column="dzyx" jdbcType="VARCHAR" />
+		<result property="yzgj" column="yzgj" jdbcType="VARCHAR" />
+		<result property="yzhjd" column="yzhjd" jdbcType="VARCHAR" />
+		<result property="zjlx" column="zjlx" jdbcType="VARCHAR" />
+		<result property="zjhm" column="zjhm" jdbcType="VARCHAR" />
+		<result property="gddh" column="gddh" jdbcType="VARCHAR" />
+		<result property="yddh" column="yddh" jdbcType="VARCHAR" />
+		<result property="nsrscxj" column="nsrscxj" jdbcType="VARCHAR" />
+		<result property="lsgx" column="lsgx" jdbcType="VARCHAR" />
+		<result property="gszgswj" column="gszgswj" jdbcType="VARCHAR" />
+		<result property="gszgswsk" column="gszgswsk" jdbcType="VARCHAR" />
+		<result property="dszgswj" column="dszgswj" jdbcType="VARCHAR" />
+		<result property="dszgswsk" column="dszgswsk" jdbcType="VARCHAR" />
+		<result property="nsrzt" column="nsrzt" jdbcType="VARCHAR" />
+		<result property="jbr" column="jbr" jdbcType="VARCHAR" />
+		<result property="slrq" column="slrq" jdbcType="TIMESTAMP" />
+		<result property="hzrq" column="hzrq" jdbcType="TIMESTAMP" />
+		<result property="fbzl" column="fbzl" jdbcType="VARCHAR" />
+		<result property="sfsygs_dsggh" column="sfsygs_dsggh" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="selectYhsKydjGt" resultMap="BaseResultMap" parameterType="com.sqxxcx.customer.api.vo.kydj.J3YhsKydjGtReqVo">		
+		SELECT t.* from yhs_mdm_db.FXPT_J3_YHS_KYDJ_GT t where 1=1
+		<if test="djxh != null and djxh != ''"> and djxh=${djxh}</if>
+		<if test="nsrmc != null and nsrmc != ''"> and nsrmc like "%${nsrmc}%"</if>
+		<if test="nsrsbh != null and nsrsbh != ''"> and nsrsbh=#{nsrsbh}</if>
+		<if test="tdjrq1 != null and tdjrq1 != ''"> and to_date(t.djrq) &lt; #{tdjrq1}</if>
+		<if test="tdjrq2 != null and tdjrq2 != ''"> and to_date(t.djrq) &gt; #{tdjrq2}</if>
+	</select>
+    
+</mapper>
